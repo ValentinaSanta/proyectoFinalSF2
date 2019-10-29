@@ -44,6 +44,7 @@ use Cake\Routing\Route\DashedRoute;
  *
  */
 Router::defaultRouteClass(DashedRoute::class);
+Router::extensions(['json']);
 
 Router::scope('/', function (RouteBuilder $routes) {
     // Register scoped middleware for in scopes.
@@ -89,7 +90,19 @@ Router::scope('/', function (RouteBuilder $routes) {
      * routes you want in your application.
      */
     $routes->fallbacks(DashedRoute::class);
+
+
 });
+Router::scope('/authentication', function($routes){
+    $routes->connect('/',['controller'=> 'authentication', 'action'=> 'login']);
+    
+});
+
+Router::scope('/profesores', function($routes){
+    $routes->connect('/home',['controller'=> 'Profesores', 'action'=> 'home']);
+    $routes->connect('/crear',['controller'=> 'Profesores', 'action'=> 'crear']);
+});
+
 
 /**
  * If you need a different set of middleware or none at all,
