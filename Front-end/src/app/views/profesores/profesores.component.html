@@ -1,0 +1,41 @@
+<p>profesores works!</p>
+<div class="card">
+    <div class="card-header">
+      <i class="fa fa-align-justify"></i> Bordered Table
+    </div>
+    <div class="card-body">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Cedula</th>
+            <th>Edad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let profe of profesores"> 
+            <td>{{profe.nombre}}</td>
+            <td>{{profe.apellido}}</td>
+            <td>{{profe.cedula}}</td>
+            <td>{{profe.edad}}</td>
+            <!-- <td>
+              <span class="badge badge-success">Active</span>
+            </td> -->
+          </tr>
+          
+        </tbody>
+      </table>
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+        <li class="page-item active">
+          <a class="page-link" href="#">1</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">4</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </div>
+  </div>
+<input type="submit" (click)="crear()" value="enviar"/> 
