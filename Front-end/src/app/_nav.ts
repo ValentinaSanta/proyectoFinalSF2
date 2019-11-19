@@ -40,6 +40,23 @@ export const navItems: NavData[] = [
     }
   },
   {
+    name: 'Profesores',
+    url: '/profesores',
+    icon: 'icon-cursor',
+    children: [
+      {
+        name: 'Listar',
+        url: '/profesores',
+        icon: 'icon-cursor'
+      },
+      {
+        name: 'crear',
+        url: '/profesores/create',
+        icon: 'icon-cursor'
+      },
+    ]
+  },
+  {
     title: true,
     name: 'Theme'
   },

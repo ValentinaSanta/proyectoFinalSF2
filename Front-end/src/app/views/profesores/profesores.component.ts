@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfesorService } from '../../services/profesor.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profesores',
@@ -8,44 +9,38 @@ import { ProfesorService } from '../../services/profesor.service';
 })
 export class ProfesoresComponent implements OnInit {
 
-  profesores: any = [
-    {nombre: 'pepe', apellido: 'ortiz', cedula:'123123', edad: 13},
-    {nombre: 'pepe1', apellido: 'ortiz1', cedula:'123123', edad: 13},
-    {nombre: 'pepe2', apellido: 'ortiz2', cedula:'123123', edad: 13},
-    {nombre: 'pepe3', apellido: 'ortiz3', cedula:'123123', edad: 13}
+  profesores: any;
 
-  ];
-
-  constructor(private profesorService: ProfesorService) { }
+  constructor(private profesorService: ProfesorService,
+              private router: Router) { }
 
   ngOnInit() {
-
     this.listar();
   }
 
-  listar(){
-    /*this.profesorService.listar().subscribe(res => {
+  listar() {
+    this.profesorService.listar().subscribe(res => {
       console.log('Imprimo', res);
-      this.profesores = res;
+      if(res['success'] === true) {
+        this.profesores = res['result'];
+      }      
     }, error => {
       console.error(error);
-    });*/
+    });
   }
-
-  /**
-   * Metodo crear profesor
-   */
-   crear(){
-    let nombre = 'Juanito444';
-    let cedula = '4444';
-
-    this.profesorService.crear(nombre, cedula).subscribe(res => {
+  eliminar(id) {
+    this.profesorService.eliminar(id).subscribe(res => {
       console.log('Imprimo', res);
+      if(res['success'] === true) {
+        window.alert("Texto a mostrar");
+        this.listar();
+      }      
     }, error => {
       console.error(error);
     });
   }
 
-  ngAfterViewInit(){    
+  goToEditar(id){
+    this.router.navigate(['profesores/edit', id]);
   }
 }

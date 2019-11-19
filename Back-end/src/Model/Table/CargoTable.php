@@ -31,6 +31,8 @@ class CargoTable extends Table
         parent::initialize($config);
 
         $this->setTable('cargo');
+        $this->setDisplayField('IDCARGO');
+        $this->setPrimaryKey('IDCARGO');
     }
 
     /**
@@ -42,7 +44,7 @@ class CargoTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->allowEmptyString('IDCARGO')
+            ->allowEmptyString('IDCARGO', null, 'create')
             ->add('IDCARGO', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator

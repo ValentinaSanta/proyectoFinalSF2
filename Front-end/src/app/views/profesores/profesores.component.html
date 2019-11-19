@@ -1,4 +1,4 @@
-<p>profesores works!</p>
+<p>Lista de profesores</p>
 <div class="card">
     <div class="card-header">
       <i class="fa fa-align-justify"></i> Bordered Table
@@ -10,18 +10,23 @@
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Cedula</th>
-            <th>Edad</th>
+            <th>Telefono</th>
+            <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let profe of profesores"> 
-            <td>{{profe.nombre}}</td>
-            <td>{{profe.apellido}}</td>
-            <td>{{profe.cedula}}</td>
-            <td>{{profe.edad}}</td>
-            <!-- <td>
-              <span class="badge badge-success">Active</span>
-            </td> -->
+            <td>{{profe.NOMBRE}}</td>
+            <td>{{profe.APELLIDO}}</td>
+            <td>{{profe.IDUSUARIO}}</td>
+            <td>{{profe.TELEFONO}}</td>
+           <td>
+              <span class="badge badge-danger" (click)="eliminar(profe.IDUSUARIO)" >Eliminar</span>
+            </td> 
+            <td>
+              <span class="badge badge-success"  (click)="goToEditar(profe.IDUSUARIO)">Editar</span>
+            </td> 
           </tr>
           
         </tbody>

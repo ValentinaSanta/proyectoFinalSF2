@@ -4,12 +4,15 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Profesore Entity
+ * Equipo Entity
  *
- * @property string $nombre
- * @property int $cedula
+ * @property int $IDEQUIPO
+ * @property string|null $NOMBRE
+ * @property string|null $MARCA
+ * @property string|null $ESPECIFICACIONES
+ * @property int|null $OPERARIOS_IDUSUARIO
  */
-class Profesore extends Entity
+class Equipo extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -21,6 +24,9 @@ class Profesore extends Entity
      * @var array
      */
     protected $_accessible = [
-        'nombre' => true
+        'NOMBRE' => true,
+        'MARCA' => true,
+        'ESPECIFICACIONES' => true,
+        'OPERARIOS_IDUSUARIO' => true
     ];
 }

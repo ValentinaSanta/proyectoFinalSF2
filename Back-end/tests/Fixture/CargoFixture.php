@@ -21,9 +21,10 @@ class CargoFixture extends TestFixture
      */
     // @codingStandardsIgnoreStart
     public $fields = [
-        'IDCARGO' => ['type' => 'biginteger', 'length' => 20, 'unsigned' => false, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'IDCARGO' => ['type' => 'biginteger', 'length' => 20, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'DESCRIPCION' => ['type' => 'string', 'length' => 50, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         '_constraints' => [
+            'primary' => ['type' => 'primary', 'columns' => ['IDCARGO'], 'length' => []],
             'CARGO_PK' => ['type' => 'unique', 'columns' => ['IDCARGO'], 'length' => []],
         ],
         '_options' => [

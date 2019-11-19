@@ -31,6 +31,8 @@ class PersonaTable extends Table
         parent::initialize($config);
 
         $this->setTable('persona');
+        $this->setDisplayField('IDUSUARIO');
+        $this->setPrimaryKey('IDUSUARIO');
     }
 
     /**
@@ -42,7 +44,7 @@ class PersonaTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->allowEmptyString('IDUSUARIO');
+            ->allowEmptyString('IDUSUARIO', null, 'create');
 
         $validator
             ->allowEmptyString('TELEFONO');

@@ -60,10 +60,24 @@ export const routes: Routes = [
         }
       },
       {
+        path: 'profesores/edit/:id',
+        component: ProfesoresCreateComponent,
+        data: {
+          title: 'Creacion Profesores'
+        }
+      },
+      {
         path: 'profesores/create',
         component: ProfesoresCreateComponent,
         data: {
-          title: 'Profesores Page'
+          title: 'Creacion Profesores'
+        }
+      },
+      {
+        path: 'profesores/edit',
+        component: ProfesoresCreateComponent,
+        data: {
+          title: 'Creacion Profesores'
         }
       },
       {

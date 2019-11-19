@@ -6,9 +6,9 @@ use Cake\ORM\Entity;
 /**
  * Usuario Entity
  *
- * @property int|null $PERSONA_IDUSUARIO
+ * @property int $PERSONA_IDUSUARIO
  * @property string|resource|null $ESTADO
- * @property int|null $CARGO_IDCARGO
+ * @property int $CARGO_IDCARGO
  */
 class Usuario extends Entity
 {
@@ -22,8 +22,6 @@ class Usuario extends Entity
      * @var array
      */
     protected $_accessible = [
-        'PERSONA_IDUSUARIO' => true,
-        'ESTADO' => true,
-        'CARGO_IDCARGO' => true
+        'ESTADO' => true
     ];
 }

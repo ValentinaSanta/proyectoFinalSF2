@@ -31,6 +31,8 @@ class UsuarioTable extends Table
         parent::initialize($config);
 
         $this->setTable('usuario');
+        $this->setDisplayField('PERSONA_IDUSUARIO');
+        $this->setPrimaryKey(['PERSONA_IDUSUARIO', 'CARGO_IDCARGO']);
     }
 
     /**
@@ -42,13 +44,13 @@ class UsuarioTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->allowEmptyString('PERSONA_IDUSUARIO');
+            ->allowEmptyString('PERSONA_IDUSUARIO', null, 'create');
 
         $validator
             ->allowEmptyString('ESTADO');
 
         $validator
-            ->allowEmptyString('CARGO_IDCARGO');
+            ->allowEmptyString('CARGO_IDCARGO', null, 'create');
 
         return $validator;
     }

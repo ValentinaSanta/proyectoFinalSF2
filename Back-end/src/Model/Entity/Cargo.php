@@ -6,7 +6,7 @@ use Cake\ORM\Entity;
 /**
  * Cargo Entity
  *
- * @property int|null $IDCARGO
+ * @property int $IDCARGO
  * @property string|null $DESCRIPCION
  */
 class Cargo extends Entity
@@ -21,7 +21,6 @@ class Cargo extends Entity
      * @var array
      */
     protected $_accessible = [
-        'IDCARGO' => true,
         'DESCRIPCION' => true
     ];
 }

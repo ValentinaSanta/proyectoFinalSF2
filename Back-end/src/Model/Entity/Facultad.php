@@ -4,16 +4,12 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Persona Entity
+ * Facultad Entity
  *
- * @property int $IDUSUARIO
- * @property int|null $TELEFONO
+ * @property int $IDFACULTAD
  * @property string|null $NOMBRE
- * @property string|null $APELLIDO
- * @property string|null $NOMBREUSUARIO
- * @property int|null $CLAVE
  */
-class Persona extends Entity
+class Facultad extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -25,10 +21,6 @@ class Persona extends Entity
      * @var array
      */
     protected $_accessible = [
-        'TELEFONO' => true,
-        'NOMBRE' => true,
-        'APELLIDO' => true,
-        'NOMBREUSUARIO' => true,
-        'CLAVE' => true
+        'NOMBRE' => true
     ];
 }

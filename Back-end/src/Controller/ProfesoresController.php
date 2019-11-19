@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
+use Cake\Datasource\ConnectionManager;
 /**
  * Profesores Controller
  *
@@ -18,34 +19,112 @@ class ProfesoresController extends AppController
      */
     public function index()
     {
-        $profesores = $this->paginate($this->Profesores);
+        $query = "SELECT persona.NOMBRE, persona.APELLIDO, 
+                         persona.TELEFONO, persona.IDUSUARIO, 
+                         usuario.CARGO_IDCARGO
+                  FROM persona INNER JOIN usuario ON 
+                         persona.IDUSUARIO = usuario.PERSONA_IDUSUARIO
+                  WHERE CARGO_IDCARGO = 1";
 
-        $this->set(compact('profesores'));
-        $respuesta = array(
-            "mensaje" => "holamundo"
-        );
+        $connection = ConnectionManager::get('default');
+        $result = $connection->execute( $query )->fetchAll('assoc');
 
-        echo json_encode($profesores);
-        exit();
+        if($result){
+            $success = true;
+            $this->set(compact('success','result'));
+        }else{
+            $success = false;
+            $this->set(compact('success'));
+        }
     }
 
-    public function crear()
+    /**
+     * Delete method
+     *
+     * @param string|null $id Profesore id.
+     * @return \Cake\Http\Response|null Redirects to index.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function eliminar()
     {
-        //dato que llega de la interfaz 
-        $dato = $this->request->getData();
-        $nombre = $dato['nombre'];
-        $cedula = $dato['cedula'];
-        $profesore = $this->Profesores->newEntity();
-        $profesore->nombre = $nombre;
-        $profesore->cedula = $cedula;
-        if ($this->Profesores->save($profesore)) {
-            //muestra dato
-            echo json_encode($dato);
-        } else 
-            echo "error";
+        $this->loadModel('Persona');
+        if ($this->request->is('get')) {
+            $idPersona =  $this->request->query('idUsuario');
+            $query = "DELETE FROM persona WHERE IDUSUARIO= $idPersona";
+            $connection = ConnectionManager::get('default');
+            $result = $connection->execute( $query );
 
-        
-        exit();
+            if($result){
+                $success = true;
+                $this->set(compact('success','result'));
+            }else{
+                $success = false;
+                $this->set(compact('success'));
+            }
+        }
+    }
+
+    public function obtener(){
+        $this->loadModel('Persona');
+        if ($this->request->is('get')) {
+            $idPersona =  $this->request->query('idUsuario');
+            $query = "SELECT persona.NOMBRE, persona.APELLIDO, 
+                         persona.TELEFONO, persona.IDUSUARIO, 
+                         usuario.CARGO_IDCARGO, persona.CLAVE,
+                         persona.NOMBREUSUARIO
+                     FROM persona INNER JOIN usuario ON 
+                         persona.IDUSUARIO = usuario.PERSONA_IDUSUARIO
+                     WHERE CARGO_IDCARGO = 1 AND IDUSUARIO = $idPersona";
+
+            $connection = ConnectionManager::get('default');
+            $result = $connection->execute( $query )->fetchAll('assoc');
+
+            if($result){
+                $success = true;
+                if(sizeof($result) > 0)
+                    $result =  $result[0];
+                $this->set(compact('success','result'));
+            }else{
+                $success = false;
+                $this->set(compact('success'));
+            }
+        }
+    }
+    
+    public function crear() {
+        $data = $this->request->data;
+
+        $this->loadModel('Persona');
+        $this->loadModel('Usuario');
+        $persona = $this->Persona->newEntity();
+        if ($this->request->is('post')) {
+            $persona->IDUSUARIO = $data['idUsuario'];
+            $persona->NOMBRE = $data['nombre'];
+            $persona->APELLIDO = $data['apellido'];
+            $persona->TELEFONO = $data['telefono'];
+
+            $resultPersona = $this->Persona->save($persona);
+            if ($resultPersona) {
+                $usuario = $this->Usuario->newEntity();
+                $usuario->ESTADO = 1;
+                $usuario->CARGO_IDCARGO = 1;
+                $usuario->PERSONA_IDUSUARIO = $persona->IDUSUARIO;
+                $resultUsuario = $this->Usuario->save($usuario);
+                if ($resultUsuario) {
+                    $success = true;
+                    $this->set(compact('success','persona'));
+                }else {
+                    $success = false;
+                    $errors = $usuario->getErrors();
+                    $this->set(compact('success','errors'));
+                }
+            } else {
+                $success = false;
+                $errors = $persona->getErrors();
+                $this->set(compact('success', 'errors'));
+            }
+    
+        }
 
     }
 
@@ -109,23 +188,4 @@ class ProfesoresController extends AppController
         $this->set(compact('profesore'));
     }
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id Profesore id.
-     * @return \Cake\Http\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function delete($id = null)
-    {
-        $this->request->allowMethod(['post', 'delete']);
-        $profesore = $this->Profesores->get($id);
-        if ($this->Profesores->delete($profesore)) {
-            $this->Flash->success(__('The profesore has been deleted.'));
-        } else {
-            $this->Flash->error(__('The profesore could not be deleted. Please, try again.'));
-        }
-
-        return $this->redirect(['action' => 'index']);
-    }
 }
