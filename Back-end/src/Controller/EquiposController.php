@@ -58,7 +58,6 @@ class EquiposController extends AppController
 
         $this->set('equipo', $equipo);
     }
-    
      /**
      * Delete method
      *
