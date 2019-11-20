@@ -103,6 +103,11 @@ Router::scope('/profesores', function($routes){
     $routes->connect('/crear',['controller'=> 'Profesores', 'action'=> 'crear']);
 });
 
+Router::scope('/equipos', function($routes){
+    $routes->connect('/home',['controller'=> 'equipos', 'action'=> 'home']);
+    $routes->connect('/crear',['controller'=> 'equipos', 'action'=> 'crear']);
+});
+
 
 /**
  * If you need a different set of middleware or none at all,

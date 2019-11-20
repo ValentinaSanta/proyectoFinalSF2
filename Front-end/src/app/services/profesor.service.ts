@@ -1,6 +1,6 @@
 import { Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-const URL = "http://localhost:8080/proyectoFinalSF2/Back-end/";
+const URL = "http://localhost:8888/proyectoFinalSF2/Back-end/";
 
 @Injectable()
 export class ProfesorService {

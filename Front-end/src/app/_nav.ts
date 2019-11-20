@@ -57,6 +57,23 @@ export const navItems: NavData[] = [
     ]
   },
   {
+    name: 'equipos',
+    url: '/equipos',
+    icon: 'icon-cursor',
+    children: [
+      {
+        name: 'Listar inventario',
+        url: '/equipos',
+        icon: 'icon-cursor'
+      },
+      {
+        name: 'crear',
+        url: '/equipos/create',
+        icon: 'icon-cursor'
+      },
+    ]
+  },
+  {
     title: true,
     name: 'Theme'
   },

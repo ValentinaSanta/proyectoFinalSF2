@@ -43,10 +43,13 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
 import { ProfesoresComponent } from './views/profesores/profesores.component';
 import { ProfesorService } from './services/profesor.service';
+import { EquiposService } from './services/equipos.service';
 
 import { AuthenticationService } from './services/authentication.service';
 import { ProfesoresCreateComponent } from './views/profesores/profesores-create/profesores-create.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { EquiposComponent } from './views/equipos/equipos.component';
+import { EquiposInitComponent } from './views/equipos/equipos-init/equipos-init.component';
 
 @NgModule({
   imports: [
@@ -63,7 +66,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     TabsModule.forRoot(),
     ChartsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   declarations: [
     AppComponent,
@@ -73,12 +77,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     LoginComponent,
     RegisterComponent,
     ProfesoresComponent,
-    ProfesoresCreateComponent
+    ProfesoresCreateComponent,
+    EquiposComponent,
+    EquiposInitComponent
   ],
   providers: [{
     provide: LocationStrategy,
     useClass: HashLocationStrategy
-  }, ProfesorService, AuthenticationService],
+  }, ProfesorService, AuthenticationService,EquiposService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

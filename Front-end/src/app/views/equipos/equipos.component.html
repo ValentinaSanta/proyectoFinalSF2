@@ -1,0 +1,58 @@
+<p>Inventario de equipos</p>
+<div class="card">
+    <div class="card-header">
+      <i class="fa fa-align-justify"></i> Bordered Table
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="colsm-6">
+            <p>Filtrar por facultad</p>
+        </div>
+        <div class="colsm-6">
+          <select [(ngModel)]="selectedFacultad" id="facultad" class="form-control" (ngModelChange)="filtrar($event)">
+            <option *ngFor="let facultad of facultades" [value]="facultad.IDFACULTAD">
+              {{facultad.NOMBRE}}
+            </option>
+          </select>
+        </div>
+      </div>
+        
+          <hr>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Especificaciones</th>
+            <th>Cantidad</th>
+            <th>Facultad</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let equipo of equipos"> 
+            <td>{{equipo.NOMBRE}}</td>
+            <td>{{equipo.ESPECIFICACIONES}}</td>
+            <td>{{equipo.CANTIDAD}}</td>
+            <td>{{equipo.FACULTADNOMBRE}}</td>
+           <td>
+              <span class="badge badge-danger" (click)="eliminar(equipo.IDEQUIPO)" >Eliminar</span>
+            </td> 
+            <td>
+              <span class="badge badge-success"  (click)="goToEditar(equipo.IDEQUIPO)">Editar</span>
+            </td> 
+          </tr>
+        </tbody>
+      </table>
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+        <li class="page-item active">
+          <a class="page-link" href="#">1</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </div>
+  </div>
+<input type="submit" (click)="crear()" value="enviar"/> 

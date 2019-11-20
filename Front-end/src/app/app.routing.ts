@@ -10,6 +10,8 @@ import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 import { ProfesoresComponent } from './views/profesores/profesores.component';
 import { ProfesoresCreateComponent } from './views/profesores/profesores-create/profesores-create.component';
+import { EquiposComponent } from './views/equipos/equipos.component';
+import { EquiposInitComponent } from './views/equipos/equipos-init/equipos-init.component';
 
 export const routes: Routes = [
   {
@@ -52,6 +54,27 @@ export const routes: Routes = [
       title: 'Home'
     },
     children: [
+      {
+        path: 'equipos',
+        component: EquiposComponent,
+        data: {
+          title: 'Equipos Page'
+        }
+      },
+      {
+        path: 'equipos/edit/:id',
+        component: EquiposInitComponent,
+        data: {
+          title: 'Equipos Page'
+        }
+      },
+      {
+        path: 'equipos/create',
+        component: EquiposInitComponent,
+        data: {
+          title: 'Creacion Equipos'
+        }
+      },
       {
         path: 'profesores',
         component: ProfesoresComponent,

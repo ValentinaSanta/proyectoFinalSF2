@@ -37,6 +37,26 @@ class ProfesoresController extends AppController
             $this->set(compact('success'));
         }
     }
+    /**
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function obtenerFacultades()
+    {
+        $query = "SELECT facultad.NOMBRE, facultad.IDFACULTAD
+                  FROM facultad";
+
+        $connection = ConnectionManager::get('default');
+        $result = $connection->execute( $query )->fetchAll('assoc');
+
+        if($result){
+            $success = true;
+            $this->set(compact('success','result'));
+        }else{
+            $success = false;
+            $this->set(compact('success'));
+        }
+    }
 
     /**
      * Delete method
@@ -90,6 +110,8 @@ class ProfesoresController extends AppController
             }
         }
     }
+
+    
     
     public function crear() {
         $data = $this->request->data;
